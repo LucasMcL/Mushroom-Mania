@@ -29,7 +29,17 @@ angular.module('MushroomMania', ['ngRoute'])
 				.then( (responseObj) => {
 					let data = responseObj.data
 					let key = Object.keys(data) // firebase rand key
-					return data[key].mushrooms
+					let mushrooms = data[key].mushrooms
+					let mushroomsFlat = []
+					for(let i = 0; i < mushrooms.length; i++) {
+						let name = Object.keys(mushrooms[i])[0]
+						let obj = mushrooms[i][name]
+						obj.name = name
+						mushroomsFlat.push(obj)
+					}
+					console.log("mushrooms", mushrooms)
+					console.log("mushroomsFlat", mushroomsFlat)
+					return mushroomsFlat
 				})
 			}
 		}
